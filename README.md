@@ -15,8 +15,8 @@ Methods:
 * Random Over Sampler
 
 Models:
+* Logistic Regression
 * Decision Tree
-* k-Nearest Neighbors (k-NN)
 * Neural Networks
 * Support Vector Machine
 
