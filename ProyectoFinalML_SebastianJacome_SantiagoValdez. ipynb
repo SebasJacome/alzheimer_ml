@@ -5,11 +5,14 @@
    "execution_count": null,
    "id": "fe46a1f9-a30c-4583-bacd-ab5c5b3620c5",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
-    "%pip install tensorflow[and-cuda] scikit-learn matplotlib seaborn pandas imbalanced-learn"
+    "%pip install tensorflow[and-cuda] scikit-learn==1.5.2 matplotlib seaborn pandas imbalanced-learn scikeras[tensorflow]"
    ]
   },
   {
@@ -748,7 +751,10 @@
    "cell_type": "markdown",
    "id": "5e2aeeb4-ca74-46ec-9d40-15731c591009",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "source": [
     "Random Over Sampling\n",
@@ -759,7 +765,10 @@
    "cell_type": "markdown",
    "id": "01132647-51fc-4a1d-adee-d1c7088149d6",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "source": [
     "Random Under Sampling\n",
@@ -781,6 +790,19 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "039d6a1e-9650-4f0e-81d4-c91bd47a8338",
+   "metadata": {
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
+   },
+   "source": [
+    "SMOTE Genera nuevas muestras sintéticas para la clase minoritaria"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": null,
    "id": "a4fb297d-4ad7-48a9-8572-11f2456bfcf9",
@@ -795,21 +817,6 @@
     "# undersampling\n",
     "nearmiss = NearMiss()\n",
     "X_train_nm, y_train_nm = nearmiss.fit_resample(X_train, y_train)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "039d6a1e-9650-4f0e-81d4-c91bd47a8338",
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "source": [
-    "SMOTE\n",
-    "\n",
-    "Genera nuevas muestras sintéticas para la clase minoritaria"
    ]
   },
   {
@@ -896,7 +903,7 @@
     }
    },
    "source": [
-    "Red neuronal\n",
+    "# Red neuronal\n",
     "\n",
     "Se implementa una red neuronal con capas densas y dropout para evitar sobreajuste"
    ]
@@ -1097,10 +1104,13 @@
    "cell_type": "markdown",
    "id": "7a38c6a1-0204-4d33-875c-5ab3af098a9d",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "source": [
-    "Aquí continuación se usa el escalador MinMaxScaler, que en general nos dio mejores resultados. También, por alguna razón, nos dio algunos errores el intentar hacerlo con StandardScaler al principio."
+    "Aquí continuación se usa el escalador MinMaxScaler, que en general nos dio mejores resultados de escalamiento. También, por alguna razón, nos dio algunos errores el intentar hacerlo con StandardScaler al principio."
    ]
   },
   {
@@ -1259,6 +1269,35 @@
   },
   {
    "cell_type": "markdown",
+   "id": "96cdaf45-c73d-4ef7-8c14-ba4e9d1cf1e9",
+   "metadata": {},
+   "source": [
+    "Esta fue la última ejecución del modelo de nuestro lado\\\n",
+    "                 Modelo              Algoritmo  Accuracy\\\n",
+    "0        Neural Network   Random Over Sampling  0.723893\\\n",
+    "1        Neural Network  Random Under Sampling  0.723769\\\n",
+    "2         Decision Tree   Random Over Sampling  0.721081\\\n",
+    "3        Neural Network               Original  0.719618\\\n",
+    "4        Neural Network                  SMOTE  0.717843\\\n",
+    "5                   SVM               Original  0.717440\\\n",
+    "6                   SVM                  SMOTE  0.715891\\\n",
+    "7   Logistic Regression   Random Over Sampling  0.714368\\\n",
+    "8                   SVM  Random Under Sampling  0.714146\\\n",
+    "9  Logistic Regression                  SMOTE  0.711988\\\n",
+    "10  Logistic Regression               Original  0.711584\\\n",
+    "11                  SVM   Random Over Sampling  0.708228\\\n",
+    "12  Logistic Regression  Random Under Sampling  0.707065\\\n",
+    "13                  SVM              Near Miss  0.698862\\\n",
+    "14  Logistic Regression              Near Miss  0.697853\\\n",
+    "15       Neural Network              Near Miss  0.687016\\\n",
+    "16        Decision Tree               Original  0.630477\\\n",
+    "17        Decision Tree                  SMOTE  0.628795\\\n",
+    "18        Decision Tree  Random Under Sampling  0.619160\\\n",
+    "19        Decision Tree              Near Miss  0.604967"
+   ]
+  },
+  {
+   "cell_type": "markdown",
    "id": "02dff81e-bf0b-4713-955c-96f1f37d6e54",
    "metadata": {
     "collapsed": false,
@@ -1270,9 +1309,9 @@
     "Es importante denotar que puede que, debido a la cercanía entre precisiones, varíen los 3 mejores resultados.\n",
     "En nuestra última ejecución, se pudo observar que los mejores resultados fueron:\n",
     "\n",
-    "Neural Network Over Sampling -> 0.7238\n",
-    "Neural Network Under Sampling -> 0.7237\n",
-    "Decision Tree Over Sampling -> 0.7168\n",
+    "* Neural Network Over Sampling -> 0.7238\n",
+    "* Neural Network Under Sampling -> 0.7237\n",
+    "* Decision Tree Over Sampling -> 0.7210\n",
     "\n",
     "Se usarán estos modelos para PCA"
    ]
@@ -1375,7 +1414,10 @@
    "execution_count": null,
    "id": "b5d33736-d64a-4d5b-9ddd-6f187cae5290",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
@@ -1408,7 +1450,10 @@
    "execution_count": null,
    "id": "f374a72f-cbf0-427e-a7c1-ed20d8b6a43d",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
@@ -1479,7 +1524,10 @@
    "cell_type": "markdown",
    "id": "c3f0d0d2-20ea-4859-a8eb-d91de0669037",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "source": [
     "En nuestro caso, incluso después de realizar el PCA. Se obtuvieron mejores resultados con el Neural Network utilizando Random Over Sampling.\n",
@@ -1490,11 +1538,15 @@
    "cell_type": "markdown",
    "id": "3fbb4e9d-bd6e-470a-980b-35ceff8e90cc",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "source": [
     "Se decidió hacer Grid Search manualmente debido a  errores encontrados al intentar usar GridSearchCV con KerasClassifier.\n",
-    "GridSearchCV no funcionaba correctamente con KerasClassifier, generando el error '__sklearn_tags__ not found'. Esto nos forzó a realizarlo de forma manual, que es más tardado pero dará resultado."
+    "GridSearchCV no funcionaba correctamente con KerasClassifier, generando el error '__sklearn_tags__ not found'. Esto nos forzó a realizarlo de forma manual, que es más tardado pero dará resultado.\n",
+    "Al parecer, el error tiene ver con alguna deprecación de elementos en las nuevas version de scikit learn."
    ]
   },
   {
@@ -1502,7 +1554,10 @@
    "execution_count": null,
    "id": "d499dbe6-f3d9-48f6-b169-3a35fb840053",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
@@ -1589,7 +1644,7 @@
     }
    },
    "source": [
-    "A continuación se grafica visualmente la matriz de confusión"
+    "A continuación se grafica visualmente la matriz de confusión del modelo con los mejores hiperparámetros"
    ]
   },
   {
@@ -1637,7 +1692,7 @@
     }
    },
    "source": [
-    "Para no afectar valores que ya fueron ejecutados, para este paso se decidió entrenar los modelos nuevamente."
+    "Para no afectar valores que ya fueron ejecutados, para este paso se decidió entrenar el modelo nuevamente."
    ]
   },
   {
@@ -1645,7 +1700,10 @@
    "execution_count": null,
    "id": "ea94cd58-e041-4d78-b7a0-da6a06e46506",
    "metadata": {
-    "collapsed": false
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
    },
    "outputs": [],
    "source": [
@@ -1690,7 +1748,7 @@
     }
    },
    "source": [
-    "A continuación, se mostrará una gráfica que compara el modelo SVM, tanto con GridSearch, como sin este."
+    "A continuación, se mostrará una gráfica que compara el modelo de NN con Oversampling, tanto con GridSearch, como con Undersampling sin GridSearch."
    ]
   },
   {
@@ -1705,9 +1763,12 @@
    },
    "outputs": [],
    "source": [
+    "# NN: Neural Network\n",
+    "# ROS: Random Over Sampling\n",
+    "# RUS: Random Under Sampling\n",
     "results = [\n",
-    "    [\"Neural Network Random Over Sampling con GridSearch\", best_accuracy],\n",
-    "    [\"Neural Network Random Under Sampling Sin GridSearch\", train_accuracy]\n",
+    "    [\"NN ROS con GridSearch\", best_accuracy],\n",
+    "    [\"NN RUS Sin GridSearch\", train_accuracy]\n",
     "]\n",
     "df_results = pd.DataFrame(results, columns=[\"Model\", \"Accuracy\"])\n",
     "\n",
@@ -1715,7 +1776,7 @@
     "sns.barplot(data=df_results, x=\"Model\", y=\"Accuracy\", palette=\"Blues\")\n",
     "plt.xlabel(\"Model Type\")\n",
     "plt.ylabel(\"Accuracy\")\n",
-    "plt.title(\"Model Comparison: GridSearch Best vs SVM RBF\")\n",
+    "plt.title(\"Model Comparison: ROS GridSearch vs RUS No GridSearch\")\n",
     "plt.show()"
    ]
   },
@@ -1744,21 +1805,23 @@
    "source": [
     "1. Comparación entre métricas de modelos\n",
     "\n",
-    "La evaluación de los modelos se realizó con las métricas: Accuracy, Precision, Recall y F1-Score.\n",
+    "La evaluación de los modelos se realizó con el accuracy y el loss.\n",
+    "* Accuracy: El modelo con mejor accuracy es Neural Network con Random Over Sampling y haciendo GridSearch (72.50%), seguido de Neural Network con Random Under Sampling (72.37%) y Decision Tree con Random Under Sampling (72.10%).\n",
+    "* Loss: La pérdida de información jugó un papel crucial, practicamente quedándose siempre por encima del 50%. Esto puede ser a por algún sobreajuste o falta de capacidad de generalizar los datos.\n",
     "\n",
-    "* Accuracy: El modelo con mejor accuracy es Neural Network con SMOTE (0.7228), seguido de SVM con datos originales (0.7195) y Logistic Regression con SMOTE (0.7144). Esto es sin contar las ejecuciones de los modelos anteriores, donde, en general, el modelo con mejor accuracy es Neural Network con SMOTE (0.7256)\n",
-    "* Precision: La precisión más alta es obtenida por Logistic Regression con SMOTE (0.6356) y Neural Network con datos originales (0.6593), y esto indica que cuando predicen la presencia de Alzheimer, son modelos confiables.\n",
-    "* Recall: El mejor recall lo obtuvo SVM con Near Miss (0.7610) y SVM con SMOTE (0.7501). Debido a esto se concluye que estos modelos identificaron mejor los casos positivos.\n",
-    "* F1-Score: La métrica que balancea precisión y recall tiene sus mejores valores en Neural Network con SMOTE (0.6721) y SVM con SMOTE (0.6818).\n",
+    "Elegimos estas métricas, porque creemos que son las que mejor representan los modelos de manera general. Dejamos a un lado Recall y F1 Score.\n",
     "\n",
+    "Cabe recalcar que, dado que las métricas de los algoritmos con los modelos son bastantes similares, puede que haya variación entre el top 3. Generalmente, el modelo de Neural Network con los algoritmos de SMOTE y Random Over Sampling eran los que destacaban.\n",
     "\n",
-    "Con este análisis, podemos concluir que Neural Network con SMOTE es el mejor modelo, ya que logra el mejor balance entre todas las métricas, mostrando que no solamente se predice correctamente, sino que mantiene un buen recall y precisión a su vez.\n",
+    "Con este análisis, podemos concluir que Neural Network con Random Over Sampling es el mejor modelo, ya que logra el mejor balance entre todas las métricas, mostrando que no solamente es el que mejor predice los resultados, sino que mantiene un buen recall y precisión a su vez.\n",
     "\n",
     "2. Impacto del Balanceo de Clases\n",
-    "Se analizaron los efectos de las técnicas de balanceo Near Miss y SMOTE y se concluyó lo siguiente:\n",
+    "Se analizaron los efectos de las técnicas de balanceo Near Miss, SMOTE, Random Over Sampling y Random Under Sampling y se concluyó lo siguiente:\n",
     "\n",
     "* SMOTE mejoró la mayoría de los modelos, logrando mejores valores en accuracy y recall al generar datos sintéticos en la clase minoritaria, sobre todo con Neural Network, como ya vimos.\n",
     "* Near Miss redujo el rendimiento en general, ya que al eliminar datos puede haber perdido información relevante.\n",
+    "* Random Over Sampling aprovechó las imagenes duplicadas para aprender mejor de estas y mantener un buen accuracy a lo largo de todas las épocas.\n",
+    "* Random Under Sampling siempre se quedó atrás en cuanto a precisión nos referimos, a comparación de Random Over Sampling, sin embargo, no es un mal algoritmo dado el equilibrado balanceo de clases que se encuentra de manera predeterminada.\n",
     "\n",
     "\n",
     "3. Interpretación de la matriz de confusión\n",
@@ -1768,7 +1831,7 @@
     "\n",
     "Hubieron menos falsos negativos comparado con otros modelos, lo cual es importante en caso de problemas médicos, ya que identificar correctamente casos positivos es lo más importante.\n",
     "\n",
-    "Con esto se puede concluir que Neural Network con SMOTE no solo obtuvo el mejor accuracy, sino que su matriz de confusión confirma que es el más confiable en la detección de Alzheimer."
+    "Con esto se puede concluir que Neural Network con Random Over Sampling no solo obtuvo el mejor accuracy, sino que su matriz de confusión confirma que es el confiable en la detección de Alzheimer."
    ]
   },
   {
@@ -1786,21 +1849,16 @@
   },
   {
    "cell_type": "markdown",
-   "id": "105796bd-91f1-4f5b-a564-c6d58993c34d",
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
+   "id": "0d82d2c9-b832-482d-9e7a-7dc446e5a46a",
+   "metadata": {},
    "source": [
     "## Evaluación del impacto del balanceo de clases \n",
     "\n",
-    "Los datos antes del balanceo de clases mostraron una pequeña desproporción con la variable objetivo, haciendo que pudiera afectar el rendimiento de los modelos. Debido a esto, se aplicaron técnicas de **Near Miss** (undersampling) y **SMOTE** (oversampling) para equilibrar las clases.\n",
+    "Los datos antes del balanceo de clases mostraron una pequeña desproporción con la variable objetivo, haciendo que pudiera afectar el rendimiento de los modelos. Debido a esto, se aplicaron técnicas de **Near Miss** y **Random Under Sampling**(undersampling), y **SMOTE** y **Random Over Sampling** (oversampling) para equilibrar las clases.\n",
     "Los resultados obtenidos mostraron que:\n",
-    "- **SMOTE** mejoró el rendimiento en la mayoría de los modelos, especialmente en Neural Network y Logistic Regression.\n",
+    "- **Random Over Sampling** mejoró el rendimiento en la mayoría de los modelos, especialmente en Neural Network y Logistic Regression.\n",
     "- **Near Miss** generalmente disminuyó la precisión debido a la eliminación de datos relevantes, por lo que no funcionó mucho para este proyecto\n",
-    "- **SVM** y **Neural Network** se beneficiaron más del balanceo, obteniendo su mayor accuracy con SMOTE. Estos modelos se utilizaron para seguir con la evaluación.\n"
+    "- **Decision Tree** y **Neural Network** se beneficiaron más del balanceo, obteniendo su mayor accuracy con Random Over Sampling. Estos modelos se utilizaron para seguir con la evaluación.\n"
    ]
   },
   {
@@ -1815,11 +1873,11 @@
    "source": [
     "## Importancia de las características y PCA\n",
     "\n",
-    "Se aplicó PCA para reducir la dimensionalidad y mejorar el desempeño de los modelos. PCA logra esto eliminando ruido y redundancias en las variables, lo que es útil para este proyecto.\n",
+    "Se aplicó PCA para reducir la dimensionalidad y mejorar el desempeño de los modelos. Sin embargo, consideramos que el hecho de que una varianza tan notoria entre las características, el eliminar aquellas que conforman menos del 10% restante, impactó negativamente al aprendizaje de los modelos.\n",
+    "\n",
     "Los obtenidos mostraron que:\n",
-    "- **Neural Network con SMOTE y PCA obtuvo un accuracy de 71.76%**, manteniendo un buen desempeño con menos características. Este fue, por mucho, el mejor accuracy de todos nuestros modelos\n",
-    "- **SVM y Logistic Regression mostraron una ligera disminución en accuracy tras haber aplicado PCA**, esto muestra que esta reducción de características no fue beneficiosa para estos modelos.\n",
-    "- En general, PCA nos permitió mejorar la eficiencia sin sacrificar demasiado el rendimiento, aunque no para todos los modelos."
+    "- **Todos los modelos** fueron impactados negativamente después de la aplicación del PCA, esto muestra que la reducción de características no fue beneficiosa para ninguno.\n",
+    "- **Decision Tree Random Under Sampling obtuvo un 64.54%**, manteniendo un buen desempeño con menos características, a comparación de los toros dos. Aún así, fue con gran diferencia, mucho peor al modelo previo a la aplicación del PCA"
    ]
   },
   {
@@ -1836,54 +1894,19 @@
     "\n",
     "Con este proyecto se pudo demostrar la importancia de realizar un pipeline completo de Machine Learning para el entrenamiento de modelos paraciertos proyectos, en este caso para un proyecto sobre Alzheimer. Se realizaron múltiples experimentos con técnicas de balanceo de clases, selección de características y optimización de hiperparámetros, para de esta forma poder construir el mejor modelo posible y obtener los mejores resultados.\n",
     "\n",
-    "1. **Neural Network con SMOTE y Grid Search es el mejor modelo**, alcanzando una accuracy superior a los otros métodos.\n",
-    "2. **SMOTE es la mejor estrategia de balanceo**, ya que permitió mejorar la precisión sin perder información relevante.\n",
-    "3. **PCA ayudó a reducir la complejidad del modelo**, aunque su impacto en la precisión varió según el algoritmo.\n"
+    "1. **Neural Network con Random Over Sampling y Grid Search es el mejor modelo**, alcanzando una accuracy superior a los otros métodos.\n",
+    "2. **SVM y Decision Tree no se quedan muy atrás de las Redes Neuronales**, ya que siempre estuvieron cerca en el podio, utilizando tanto SMOTE como el dataset original sin balanceo.\n",
+    "3. **PCA impactó negativamente los resultados** de los tres mejores modelos y algoritmos.   \n",
+    "\n",
+    "Aún así, consideramos que la precisión del modelo no es deseada, y con margen de mejora. El modelo logra predecir correctamente 7 de cada 10 imágenes, lo cual es insuficiente para aplicaciones clínicas."
    ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "aab110a5-3aba-4977-bc01-9865007a8b8e",
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "86cc1117-0011-4183-b85d-7dcf08028b78",
-   "metadata": {
-    "collapsed": false,
-    "jupyter": {
-     "outputs_hidden": false
-    }
-   },
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {
   "kernelspec": {
-   "argv": [
-    "/Users/sjacome/.venvs/ml_3.11/bin/python3",
-    "-Xfrozen_modules=off",
-    "-m",
-    "ipykernel_launcher",
-    "-f",
-    "{connection_file}"
-   ],
-   "display_name": "ml311",
-   "env": null,
-   "interrupt_mode": "signal",
+   "display_name": "Python 3 (ipykernel)",
    "language": "python",
-   "metadata": {
-    "debugger": true
-   },
-   "name": "ml311"
+   "name": "python3"
   },
   "language_info": {
    "codemirror_mode": {
@@ -1895,7 +1918,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.10.12"
+   "version": "3.13.2"
   },
   "name": "data_exploration.ipynb"
  },
