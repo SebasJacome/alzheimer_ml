@@ -1,5 +1,10 @@
 # Final Proyect: Machine Learning
 ## Due date: March 6th, 2025
+
+# Team Members:
+* Santiago Valdez Bocardo
+* Sebastián Arturo Jácome Herrera
+
 This is the final project for the machine learning course I'm currently taking for the specialty.
 
 Alzheimer's Prediction Dataset:
