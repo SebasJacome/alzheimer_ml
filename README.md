@@ -13,6 +13,8 @@ Methods:
 * No Balance
 * Random Under Sampler
 * Random Over Sampler
+* Near Miss
+* SMOTE
 
 Models:
 * Logistic Regression
